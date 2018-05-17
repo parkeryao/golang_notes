@@ -85,10 +85,10 @@ func main() {
 }
 ```
 
-### `map`的键
+### map的键
 键可以是任意类型，只要其值能用`==`运算符比较
 
-### `range`循环
+### range循环
 `map`的迭代顺序并不确定，从实践来看，该顺序随机，每次运行都会变化。这种设计是有意为之的，因为能防止程序依赖特定遍历顺序，而这是无法保证的。
 
 ### 格式化输出
@@ -104,4 +104,20 @@ func main() {
 |%v          |变量的自然形式（natural format）|
 |%T          |变量的类型|
 |%%          |字面上的百分号标志（无操作数）|
+
+### 标准输入os.Stdin
+在命令行输入过程中（标准输入`os.Stdin`），`Ctrl D`会告诉系统终止输入，从而后续的程序可以继续。
+虽然是从命令行中输入，但在系统看来，这些输入就是一个文件，所以我们可以说`os.Stdin`就是一个`File`实例，这也和Linux中把所以资源都当作文件的这个思想
+
+```GO
+var (
+        Stdin  = NewFile(uintptr(syscall.Stdin), "/dev/stdin")
+        Stdout = NewFile(uintptr(syscall.Stdout), "/dev/stdout")
+        Stderr = NewFile(uintptr(syscall.Stderr), "/dev/stderr")
+)
+
+```
+
+### 声明和使用
+函数和
 
