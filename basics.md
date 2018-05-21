@@ -119,5 +119,25 @@ var (
 ```
 
 ### 声明和使用
-函数和
+函数和包级别的变量可以任意顺序声明，不影响其被调用，调用可以声明之前。
+
+### 关于Exit(x)
+```GO
+// Exit causes the current program to exit with the given status code.
+// Conventionally, code zero indicates success, non-zero an error.
+// The program terminates immediately; deferred functions are not run.
+func Exit(code int) {
+	if code == 0 {
+		// Give race detector a chance to fail the program.
+		// Racy programs do not have the right to finish successfully.
+		runtime_beforeExit()
+	}
+	syscall.Exit(code)
+}
+```
+
+### Shell输入输出重定向
+http://www.runoob.com/linux/linux-shell-io-redirections.html
+
+
 
